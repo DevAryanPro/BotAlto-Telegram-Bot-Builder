@@ -41,59 +41,125 @@ BotAlto is an open-source platform for hosting and managing Telegram bots with a
 
 ## Usage Guide
 
-### Creating a Bot
-1. Click "Create New Bot" in the dashboard
-2. Enter your Telegram bot token (get it from @BotFather)
-3. Give your bot a name
-4. Click "Create Bot"
+## 🚀 Creating Commands
 
-### Managing Bots
-- **Start/Stop**: Toggle bot status with the Start/Stop buttons
-- **Commands**: Click "Commands" to manage bot commands
-- **Delete**: Remove bots you no longer need
+1. Open the **Commands** card for your bot  
+2. Enter **command name** (omit `/`)  
+3. Paste **JavaScript** code (Telegraf context)  
+4. Hit **Save** → instant hot-reload
 
-### Creating Commands
-1. Navigate to the Commands section for your bot
-2. Enter a command name (without the leading `/`)
-3. Write the JavaScript code that executes when the command is called
-4. Click "Save Command"
+---
 
-## Command Examples
+## 📖 Command Examples
 
-Here are some example commands you can create:
-
-### Basic Greeting
+### 1. Basic Greeting
 ```javascript
-ctx.reply('Hello! Welcome to our bot. How can I help you today?');
+ctx.reply('Hello 👋, welcome to BotAlto!');
 ```
 
-### User Info
+### 2. User Info
 ```javascript
-ctx.replyWithMarkdown(`*User Info*:
-- ID: ${ctx.from.id}
-- Name: ${ctx.from.first_name} ${ctx.from.last_name || ''}
-- Username: @${ctx.from.username || 'none'}`);
+ctx.replyWithMarkdown(
+  `*User Info*:\n- ID: ${ctx.from.id}\n- Name: ${ctx.from.first_name}\n- Username: @${ctx.from.username || 'none'}`
+);
 ```
 
-### Image Response
+### 3. Send Image
 ```javascript
-ctx.replyWithPhoto({ url: 'https://example.com/image.jpg' }, {
-  caption: 'Here is your requested image!'
-});
+ctx.replyWithPhoto(
+  { url: 'https://picsum.photos/600/400' },
+  { caption: '🖼️ Random image via BotAlto' }
+);
 ```
 
-### Keyboard Menu
+### 4. Inline Keyboard Menu
 ```javascript
 ctx.reply('Choose an option:', {
   reply_markup: {
-    keyboard: [
-      ['Option 1', 'Option 2'],
-      ['Help', 'Cancel']
-    ],
+    inline_keyboard: [
+      [{ text: '🔔 Notify me', callback_data: 'notify' }],
+      [{ text: '❓ Help', callback_data: 'help' }]
+    ]
+  }
+});
+```
+
+### 5. Dice Roll
+```javascript
+ctx.replyWithDice();
+```
+
+### 6. Weather (mock)
+```javascript
+const city = ctx.message.text.split(' ')[1] || 'Delhi';
+ctx.reply(`🌤️ ${city}: Sunny, 28°C`);
+```
+
+### 7. URL Shortener
+```javascript
+const url = ctx.message.text.split(' ')[1];
+if (!url) return ctx.reply('Usage: /shorten <url>');
+ctx.reply(`Short link: https://tinyurl.com/xyz`);
+```
+
+### 8. CRON reminder (in-chat)
+```javascript
+setTimeout(() => ctx.reply('⏰ Reminder fired!'), 5000);
+```
+
+### 9. Random Joke
+```javascript
+const jokes = [
+  'Why don’t scientists trust atoms? Because they make up everything!',
+  'I would tell you a UDP joke, but you might not get it.'
+];
+ctx.reply(jokes[Math.floor(Math.random() * jokes.length)]);
+```
+
+### 10. Markdown / HTML Mix
+```javascript
+ctx.replyWithHTML(
+  '<b>Bold</b> & <i>Italic</i>\n<a href="https://bot.alto">Visit BotAlto</a>'
+);
+```
+
+### 11. Download & Forward File
+```javascript
+ctx.replyWithDocument({ source: 'https://example.com/report.pdf' });
+```
+
+### 12. Emoji Keyboard
+```javascript
+ctx.reply('Pick an emoji:', {
+  reply_markup: {
+    keyboard: [['😀', '😂', '😍'], ['❤️', '👍', '🎉']],
     resize_keyboard: true
   }
 });
 ```
+
+### 13. Poll
+```javascript
+ctx.poll(
+  'Pick your favorite language',
+  ['JavaScript', 'Python', 'Go'],
+  { is_anonymous: false }
+);
+```
+
+### 14. Sticker Pack
+```javascript
+ctx.replyWithSticker('CAACAgIAAxkBAAE...');
+```
+
+### 15. Send Audio
+```javascript
+ctx.replyWithAudio(
+  { url: 'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3' },
+  { title: 'Bell Ring' }
+);
+```
+
 
 ## Screenshots
 
@@ -121,12 +187,19 @@ ctx.reply('Choose an option:', {
 
 ## Future Roadmap
 
-### Planned Features
-- ✅ **Current Version**: v1.0.0 - Basic bot management
-- 🔜 **v1.1.0**: Database persistence for bots and commands
-- 🔜 **v1.2.0**: User authentication system
-- 🔜 **v1.3.0**: Analytics and usage statistics
-- 🔜 **v2.0.0**: Plugin system for extended functionality
+| Phase | Status | Highlights |
+|-------|--------|------------|
+| ✅ **v1.0.0** | **LIVE** | Core bot creator, hot-reload commands, start/stop per bot, zero-config |
+| 🔜 **v1.1.0** | **Next** | SQLite / MongoDB persistence → bots & commands survive restarts |
+| 🔜 **v1.2.0** | **Next** | JWT or OAuth2 login → manage only **your** bots |
+| 🔜 **v1.3.0** | **Next** | Real-time usage stats, command heat-map, webhook health |
+| 🔜 **v2.0.0** | **Future** | Plugin marketplace (AI image gen, payments, CRON, etc.) |
+| 🔜 **v2.1.0** | **Future** | Multi-language UI (React-i18n) |
+| 🔜 **v2.2.0** | **Future** | Docker & Kubernetes auto-scaling for 24/7 fleets |
+| 🔜 **v2.3.0** | **Future** | Built-in CI/CD → push code via GitHub Actions |
+| 🔜 **v3.0.0** | **Vision** | AI Copilot → natural-language command generator |
+
+---
 
 ### Version History
 | Version | Date       | Changes                     |
