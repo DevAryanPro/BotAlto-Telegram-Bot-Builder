@@ -1,6 +1,6 @@
 # BotAlto - Telegram Bot Hosting Platform
 
-![BotAlto Logo](https://via.placeholder.com/150x50?text=BotAlto+Logo) *[Placeholder for logo]*
+![BotAlto Logo](https://raw.githubusercontent.com/DevAryanPro/BotAlto-Telegram-Bot-Builder/refs/heads/main/Images/photo_2025-08-02_15-44-07.jpg) *[Placeholder for logo]*
 
 BotAlto is an open-source platform for hosting and managing Telegram bots with a user-friendly dashboard. It allows you to create, manage, and deploy multiple Telegram bots from a single interface, complete with custom command creation and real-time control.
 
@@ -99,11 +99,11 @@ ctx.reply('Choose an option:', {
 
 *[Placeholder for dashboard screenshot]*
 
-![Dashboard](https://via.placeholder.com/800x500?text=BotAlto+Dashboard)
+![Dashboard](https://raw.githubusercontent.com/DevAryanPro/BotAlto-Telegram-Bot-Builder/refs/heads/main/Images/Screenshot%20(23).png)
 
 *[Placeholder for commands screenshot]*
 
-![Commands](https://via.placeholder.com/800x500?text=Commands+Management)
+![Commands](https://raw.githubusercontent.com/DevAryanPro/BotAlto-Telegram-Bot-Builder/refs/heads/main/Images/Screenshot%20(22).png)
 
 ## Technical Details
 
